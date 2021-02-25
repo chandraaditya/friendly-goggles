@@ -46,12 +46,13 @@ class InitialParser:
                Car(temp2)
                line = fp.readline()
 
-def writer(  ):
-    tfmap = dict()
+def writer(tfmap):
     filepath = "output.txt"
     list = tfmap.toList()
     with open(filepath) as fp:
         fp.writelines(len(list))
         for i in range(len(list)):
-            fp.writelines(list[i])
-            fp.writelines(list[i].out)
+            fp.writelines(list[i].intersection.id)
+            fp.writelines(len(list[i].roads))
+            for j in range(len(list[i].roads)):
+                fp.writelines(list[i].roads[j].name + str(list[i].time[j]))
