@@ -35,6 +35,28 @@ class Intersection:
             self.outRoads[outRoad.name] = outRoad
 
 
+class TrafficLight:
+    def __init__(self, intersection):
+        self.intersection = intersection
+        self.roads = []
+        self.currentRoad = 0
+        self.currentTimeOnRoad = 0
+
+    def addTrafficInstruction(self, road):
+        self.roads.append(road)
+        if self.currentRoad == 0 and self.currentTimeOnRoad == 0:
+            self.currentRoad = road
+
+    def updateRoad(self):
+        self.currentTimeOnRoad = self.currentTimeOnRoad + 1
+        if self.currentTimeOnRoad >= self.roads[self.currentRoad].cost and self.currentRoad < len(self.roads):
+            self.currentRoad = self.currentRoad + 1
+            self.currentTimeOnRoad = 0
+        elif self.currentRoad == len(self.roads):
+            self.currentRoad = 0
+            self.currentTimeOnRoad = 0
+
+
 class Car:
     counter = 0
 
