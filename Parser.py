@@ -5,7 +5,7 @@ import queue
 
 class InitialParser:
     def __init__(self):
-        self.filepath = 'd.txt'
+        self.filepath = 'c.txt'
         self.CarList = []
         self.RoadList = dict()
         self.IntersectionList = dict()
@@ -65,14 +65,13 @@ def randomiser(interList, time):
         timeT = time
         temp = TrafficLight(x)
         for key2, y in x.inRoads.items():
-            t = randint(0,time)
-            time = time - t
+            t = randint(0,timeT)
+            timeT = timeT - t
             temp.addTrafficInstruction(y, t)
         tf[x.ID] = temp
     return tf
 
 prad = InitialParser()
 prad.inputFileParse()
-print(prad.IntersectionList)
 key = randomiser(prad.IntersectionList, prad.time)
 writer(key)
