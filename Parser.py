@@ -1,18 +1,21 @@
-from objects import Road, Intersection,Car
+from random import randint
+
+from objects import Road, Intersection, Car, TrafficLight
 import queue
 
 class InitialParser:
     def __init__(self):
-        filepath = 'Files/a.txt'
-        CarList = []
-        RoadList = dict()
-        IntersectionList = dict()
+        self.filepath = 'd.txt'
+        self.CarList = []
+        self.RoadList = dict()
+        self.IntersectionList = dict()
+        self.time = 0
 
     def inputFileParse(self):
         with open(self.filepath) as fp:
            line = fp.readline()
            words = line.split()
-           time = int(words[0])
+           self.time = int(words[0])
            numIntersection = int(words[1])
            numStreet = int(words[2])
            numCars = int(words[3])
@@ -48,11 +51,28 @@ class InitialParser:
 
 def writer(tfmap):
     filepath = "output.txt"
-    list = tfmap.toList()
-    with open(filepath) as fp:
-        fp.writelines(len(list))
-        for i in range(len(list)):
-            fp.writelines(list[i].intersection.id)
-            fp.writelines(len(list[i].roads))
-            for j in range(len(list[i].roads)):
-                fp.writelines(list[i].roads[j].name + str(list[i].time[j]))
+    with open(filepath , 'w') as fp:
+        fp.writelines(str(len(tfmap.values()) )+ "\n")
+        for key, i in tfmap.items():
+            fp.writelines(i.intersection.ID + "\n")
+            fp.writelines(str (len(i.roads) ) + "\n")
+            for j in range(len(i.roads)):
+                fp.writelines(str(i.roads[j].name) + " "+ str(i.time[j]) + "\n")
+
+def randomiser(interList, time):
+    tf = dict()
+    for key, x in interList.items():
+        timeT = time
+        temp = TrafficLight(x)
+        for key2, y in x.inRoads.items():
+            t = randint(0,time)
+            time = time - t
+            temp.addTrafficInstruction(y, t)
+        tf[x.ID] = temp
+    return tf
+
+prad = InitialParser()
+prad.inputFileParse()
+print(prad.IntersectionList)
+key = randomiser(prad.IntersectionList, prad.time)
+writer(key)
