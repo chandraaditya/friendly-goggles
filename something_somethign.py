@@ -1,2 +1,11 @@
-a = 5
-print(a)
+from simanneal import Annealer
+
+
+class PizzasSolver(Annealer):
+    def move(self):
+        pass
+
+    def energy(self):
+        pass
+
+
