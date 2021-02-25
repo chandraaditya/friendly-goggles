@@ -5,7 +5,7 @@ import queue
 
 class InitialParser:
     def __init__(self):
-        self.filepath = 'c.txt'
+        self.filepath = 'd.txt'
         self.CarList = []
         self.RoadList = dict()
         self.IntersectionList = dict()
@@ -29,7 +29,7 @@ class InitialParser:
                if words[0] not in self.IntersectionList.keys():
                    self.IntersectionList[words[0]] = Intersection(words[0])
                self.IntersectionList[words[0]].addOutRoad(temp)
-
+               print(x)
                if words[1] not in self.IntersectionList.keys():
                    self.IntersectionList[words[1]] = Intersection(words[1])
                self.IntersectionList[words[1]].addInRoad(temp)
@@ -46,6 +46,7 @@ class InitialParser:
                temp2 = []
                for j in range(num):
                    temp2.append(self.RoadList[words[j+1]])
+                   print(j)
                Car(temp2)
                line = fp.readline()
 
@@ -57,6 +58,7 @@ def writer(tfmap):
             fp.writelines(i.intersection.ID + "\n")
             fp.writelines(str (len(i.roads) ) + "\n")
             for j in range(len(i.roads)):
+                print("writing...")
                 fp.writelines(str(i.roads[j].name) + " "+ str(i.time[j]) + "\n")
 
 def randomiser(interList, time):
@@ -65,6 +67,7 @@ def randomiser(interList, time):
         timeT = time
         temp = TrafficLight(x)
         for key2, y in x.inRoads.items():
+            print(y)
             t = randint(0,timeT)
             timeT = timeT - t
             temp.addTrafficInstruction(y, t)
