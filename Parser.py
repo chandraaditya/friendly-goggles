@@ -65,7 +65,10 @@ def randomiser(interList, time):
         timeT = time
         temp = TrafficLight(x)
         for key2, y in x.inRoads.items():
-            t = randint(0,timeT)
+            if(timeT > 20):
+                t = randint(0,20)
+            else:
+                t = randint(0, timeT)
             timeT = timeT - t
             temp.addTrafficInstruction(y, t)
         tf[x.ID] = temp
