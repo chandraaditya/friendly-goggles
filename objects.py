@@ -64,4 +64,16 @@ class Car:
         Car.counter += 1
         self.counter = Car.counter
         self.path = path
-        self.currentCost = 0
+        self.totalCost = 0
+        self.progressOnCurrentRoad = 0
+        self.currentRoad = 0
+
+    def updateCar(self):
+        self.progressOnCurrentRoad += 1
+        self.totalCost += 1
+        if self.progressOnCurrentRoad >= self.path[self.currentRoad].cost:
+            self.progressOnCurrentRoad = 0
+            self.currentRoad += 1
+            if self.currentRoad >= len(self.path):
+                return 1
+        return 0

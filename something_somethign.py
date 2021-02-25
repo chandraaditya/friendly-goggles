@@ -7,4 +7,3 @@ class TrafficLightsSolver(Annealer):
 
     def energy(self):
         pass
-
