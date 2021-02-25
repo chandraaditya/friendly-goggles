@@ -77,3 +77,14 @@ class Car:
             if self.currentRoad >= len(self.path):
                 return 1
         return 0
+
+    def canMove(self, trafficLights):
+        if self.progressOnCurrentRoad >= self.path[self.currentRoad].cost:
+            if trafficLights[self.path[self.currentRoad + 1].toIntersection].roads[
+                trafficLights[self.path[self.currentRoad + 1].toIntersection].currentRoad] == self.path[
+                self.currentRoad + 1]:
+                return True
+            else:
+                return False
+        else:
+            return True
