@@ -7,5 +7,7 @@ with open(filepath) as fp:
    cnt = 1
    while line:
        print(line)
-       line = fp.readline()
        cnt += 1
+       words = line.split()
+       print(words)
+       line = fp.readline()
